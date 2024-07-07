@@ -3,7 +3,7 @@ alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias ff="fzf --preview 'bat --theme=\"Catppuccin Mocha\" --color=always {}' --preview-window '~3'"
-alias cat='bat'
+alias cat='bat --theme="Catppuccin Mocha"'
 
 # Directories
 alias ..='cd ..'
