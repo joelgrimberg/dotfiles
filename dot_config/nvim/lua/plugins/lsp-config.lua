@@ -1,56 +1,67 @@
 return {
-  {
+  "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    { "williamboman/mason.nvim", config = true },
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "tsserver" },
-      })
-    end,
+    "folke/neodev.nvim",
+    { "b0o/schemastore.nvim" },
+    { "hrsh7th/cmp-nvim-lsp" },
   },
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
+  config = function()
+    require("mason").setup({
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
       },
-    },
-  },
+    })
+    require("mason-lspconfig").setup({
+      ensure_installed = vim.tbl_keys(require("plugins.lsp.servers")),
+    })
+    require("lspconfig.ui.windows").default_options.border = "single"
 
-  -- add tsserver and setup with typescript.nvim instead of lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    require("neodev").setup()
 
-      local lspconfig = require("lspconfig")
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.tsserver.setup({
-        capabilities = capabilities,
-      })
+    local mason_lspconfig = require("mason-lspconfig")
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, {})
-    end,
-
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
+    mason_lspconfig.setup_handlers({
+      function(server_name)
+        require("lspconfig")[server_name].setup({
+          capabilities = capabilities,
+          on_attach = require("plugins.lsp.on_attach").on_attach,
+          settings = require("plugins.lsp.servers")[server_name],
+          filetypes = (require("plugins.lsp.servers")[server_name] or {}).filetypes,
+        })
       end,
-    },
-  },
+    })
+
+    vim.diagnostic.config({
+      title = false,
+      underline = true,
+      virtual_text = true,
+      signs = true,
+      update_in_insert = false,
+      severity_sort = true,
+      float = {
+        source = "always",
+        style = "minimal",
+        border = "rounded",
+        header = "",
+        prefix = "",
+      },
+    })
+
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+  end,
 }
