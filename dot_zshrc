@@ -21,6 +21,9 @@ setopt EXTENDED_HISTORY
 alias history='history 1'
 alias h=history
 
+function chpwd() { 
+  lsa -a 
+}
 
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
@@ -40,4 +43,4 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bash ~/scripts/joelgrimberg-ascii.sh
-source ./scripts/aliases.sh
+source ~/scripts/aliases.sh
