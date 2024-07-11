@@ -3,6 +3,11 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.g.go_debug_windows = {
+	vars = "rightbelow 60vnew",
+	stack = "rightbelow 10new",
+}
+
 local options = {
 	-- incsearch = true, -- make search act like search in modern browsers
 	backup = false, -- creates a backup file

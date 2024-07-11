@@ -15,6 +15,7 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local trouble = require("trouble.sources.telescope")
+
 			local icons = require("config.icons")
 
 			vim.api.nvim_create_autocmd("FileType", {

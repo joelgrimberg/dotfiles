@@ -25,6 +25,7 @@ return {
 				-- context_commentstring = { enable = true, enable_autocmd = false },
 				auto_install = true,
 				ensure_installed = {
+					"go",
 					"html",
 					"javascript",
 					"json",

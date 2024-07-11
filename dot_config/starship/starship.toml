@@ -1,6 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+$kubernetes
 [](surface0)\
 $os\
 $username\
@@ -179,6 +180,17 @@ format = '[[  $time ](fg:mantle bg:purple)]($style)'
 
 [line_break]
 disabled = false
+
+# https://starship.rs/config/#kubernetes
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style)'
+contexts = [
+  { context_pattern = "minikube", style = "cyan bold", symbol = "📚 " },
+  { context_pattern = "dev", style = "cyan bold", symbol = "🔵 " },
+  { context_pattern = "homolog", style = "yellow bold", symbol = "🟡 " },
+  { context_pattern = "prod", style = "red bold", symbol = "🔴 " },
+]
 
 [character]
 disabled = false
