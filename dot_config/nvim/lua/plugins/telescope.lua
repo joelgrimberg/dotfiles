@@ -14,8 +14,7 @@ return {
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
-			local trouble = require("trouble.sources.telescope")
-
+			local trouble = require("trouble.providers.telescope")
 			local icons = require("config.icons")
 
 			vim.api.nvim_create_autocmd("FileType", {
@@ -43,7 +42,7 @@ return {
 					mappings = {
 						i = {
 							["<esc>"] = actions.close,
-							["<C-t>"] = trouble.open,
+							["<C-t>"] = trouble.open_with_trouble,
 						},
 
 						n = { ["<C-t>"] = trouble.open_with_trouble },

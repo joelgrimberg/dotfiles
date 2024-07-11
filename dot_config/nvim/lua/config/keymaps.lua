@@ -3,8 +3,6 @@ local map = vim.keymap.set
 
 vim.api.nvim_set_var("mapleader", " ")
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { focusable = false })
-
 -- Keep cursor centered when scrolling
 map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
@@ -195,24 +193,29 @@ vim.api.nvim_set_keymap("n", "<leader>git", "<cmd>:FloatermNew lazygit<CR>", { n
 vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>:Gvdiffsplit<CR>", { noremap = true, silent = true })
 
 -- Normal mode: Map <leader>xx to toggle Trouble
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true })
 
 -- Normal mode: Map <leader>xw to toggle workspace diagnostics in Trouble
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>xw",
+	"<cmd>TroubleToggle workspace_diagnostics<CR>",
+	{ noremap = true, silent = true }
+)
 
 -- Normal mode: Map <leader>xd to toggle document diagnostics in Trouble
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>xd",
-	"<cmd>Trouble diagnostics toggle filter.buffer=0<CR>",
+	"<cmd>TroubleToggle document_diagnostics<CR>",
 	{ noremap = true, silent = true }
 )
 
 -- Normal mode: Map <leader>xq to toggle quickfix in Trouble
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble diagnostics quickfix<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { noremap = true, silent = true })
 
 -- Normal mode: Map <leader>xl to toggle loclist in Trouble
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist toggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { noremap = true, silent = true })
 
 -- Normal mode: Map gR to toggle lsp_references in Trouble
 vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { noremap = true, silent = true })
