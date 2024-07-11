@@ -1,3 +1,7 @@
+# Initialize Completions
+autoload -Uz compinit
+compinit
+
 # Setting the history
 #set history size
 export HISTSIZE=10000
@@ -22,7 +26,6 @@ function chpwd() {
 
 eval "$(starship init zsh)"
 
-
 # shellcheck disable=SC1090
 source <(fzf --zsh)
 
@@ -36,5 +39,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bash ~/scripts/joelgrimberg-ascii.sh
-source /users/joelgrimberg/scripts/aliases.sh
+source ~/scripts/aliases.sh
+source ~/scripts/git.sh
 eval "$(zellij setup --generate-auto-start zsh)"
