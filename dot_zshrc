@@ -42,3 +42,4 @@ bash ~/scripts/joelgrimberg-ascii.sh
 source ~/scripts/aliases.sh
 source ~/scripts/git.sh
 eval "$(zellij setup --generate-auto-start zsh)"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
