@@ -18,6 +18,7 @@ setopt EXTENDED_HISTORY
 alias history='history 1'
 alias h=history
 
+# triggers the list command after each change of directory
 function chpwd() { 
   ls -a 
 }
@@ -38,8 +39,12 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # shellcheck disable=SC1094
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-bash ~/scripts/joelgrimberg-ascii.sh
-source ~/scripts/aliases.sh
-source ~/scripts/git.sh
+bash ~/scripts/joelgrimberg.ascii.sh
+
+source ~/scripts/random.aliases.sh
+source ~/scripts/git.aliases.sh
+source ~/scripts/kubernetes.aliases.sh
+
 eval "$(zellij setup --generate-auto-start zsh)"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
