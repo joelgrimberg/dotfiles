@@ -1,7 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$kubernetes
+$battery\
+$kubernetes\
 [](surface0)\
 $os\
 $username\
@@ -28,6 +29,20 @@ $time\
 $line_break$character"""
 
 palette = 'catppuccin_mocha'
+
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+
+[[battery.display]]
+threshold = 20
+style = 'bold red'
+discharging_symbol = '💀 '
+
+[[battery.display]]
+threshold = 40
+style = 'green'
+discharging_symbol = '💦 '
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
@@ -79,7 +94,8 @@ Ubuntu = "󰕈"
 SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
-Macos = ""
+#Macos = ""
+Macos = "🍎"
 Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
@@ -126,6 +142,8 @@ format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
 symbol = ""
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+detect_files = ['package.json', '.node-version', '!bunfig.toml', '!bun.lockb']
+
 
 [c]
 symbol = " "
@@ -187,9 +205,6 @@ disabled = false
 format = '[$symbol$context( \($namespace\))]($style)'
 contexts = [
   { context_pattern = "minikube", style = "cyan bold", symbol = "📚 " },
-  { context_pattern = "dev", style = "cyan bold", symbol = "🔵 " },
-  { context_pattern = "homolog", style = "yellow bold", symbol = "🟡 " },
-  { context_pattern = "prod", style = "red bold", symbol = "🔴 " },
 ]
 
 [character]
