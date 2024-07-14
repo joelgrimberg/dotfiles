@@ -46,5 +46,10 @@ source ~/scripts/git.aliases.sh
 source ~/scripts/kubernetes.aliases.sh
 
 eval "$(zellij setup --generate-auto-start zsh)"
+
+autoload -Uz compinit
+compinit -u
+fpath=(~/.config/zsh/completions $fpath)
+
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
