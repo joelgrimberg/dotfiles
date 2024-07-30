@@ -106,7 +106,7 @@ map("n", "<Leader><right>", ":bn<CR>", opts)
 map("n", "<Leader><left>", ":bp<CR>", opts)
 
 -- search current buffer
-map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", opts)
+map("n", "<C-b>", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 
 -- search modified files
 map("n", "<Leader>m", ":Telescope git_status<CR>", opts)
