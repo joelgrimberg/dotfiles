@@ -29,5 +29,4 @@ else
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/zsh-plugins/zsh-autosuggestions > /dev/null 2>&1
     echo "✅ zsh-autosuggestions installed"
   fi
-
 fi
