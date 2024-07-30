@@ -27,6 +27,10 @@ function chpwd() {
 
 eval "$(starship init zsh)"
 
+export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+
+
 export BAT_THEME="Catppuccin Mocha"
 export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always --style=numbers {}'"
@@ -43,8 +47,6 @@ source ~/scripts/random.aliases.sh
 source ~/scripts/git.aliases.sh
 source ~/scripts/kubernetes.aliases.sh
 
-eval "$(zellij setup --generate-auto-start zsh)"
-
 # Setup completions
 #autoload -Uz compinit
 compinit -u
@@ -53,5 +55,18 @@ fpath=(~/.config/zsh/completions $fpath)
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
 
+if [[ ! $(tmux list-sessions) ]]; then 
+  tmux
+fi
 
 bash ~/scripts/joelgrimberg.ascii.sh
+
+# inside your .bashrc or .zshrc (on the server side) add:
+
+# start tmux if we ssh into the box
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+    tmux attach-session -t $USER || tmux new-session -s $USER
+fi
+
+# this will attach to an ongoing tmux session or start a new one
+# the session name will be the name of the user ($USER)
