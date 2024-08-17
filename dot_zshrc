@@ -27,6 +27,8 @@ function chpwd() {
 
 eval "$(starship init zsh)"
 
+eval "$(zoxide init zsh)"
+
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
 
