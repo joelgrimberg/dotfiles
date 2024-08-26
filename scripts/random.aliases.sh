@@ -30,8 +30,3 @@ alias rsync-copy='rsync -v -r --progress '
 # Compression
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
 alias decompress="tar -xzf"
-
-# when on Debian or Ubuntu, bat should be called with batcat
-if ! type bat > /dev/null ; then
-alias cat='batcat'
-fi

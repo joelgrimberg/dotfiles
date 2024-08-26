@@ -201,7 +201,7 @@ disabled = false
 
 # https://starship.rs/config/#kubernetes
 [kubernetes]
-disabled = true
+disabled = false
 format = '[$symbol$context( \($namespace\))]($style)'
 contexts = [
   { context_pattern = "minikube", style = "cyan bold", symbol = "📚 " },

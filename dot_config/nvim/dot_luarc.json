@@ -1,0 +1,11 @@
+{
+    "diagnostics.disable": [
+        "missing-fields",
+        "undefined-global",
+        "unused-local",
+        "inject-field"
+    ],
+    "diagnostics.globals": [
+        "setup"
+    ]
+}

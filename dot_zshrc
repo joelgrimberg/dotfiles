@@ -1,7 +1,3 @@
-# Initialize Completions
-autoload -Uz compinit
-compinit 
-
 # Setting the history
 #set history size
 export HISTSIZE=10000
@@ -23,13 +19,16 @@ function chpwd() {
   ls -a 
 }
 
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
+
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+export PATH="/Users/joelgrimberg/.local/share/nvim/mason/bin:$PATH"
 eval "$(tmuxifier init -)"
 
 
@@ -42,8 +41,8 @@ export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ~/scripts/random.aliases.sh
 source ~/scripts/git.aliases.sh
@@ -51,8 +50,8 @@ source ~/scripts/kubernetes.aliases.sh
 
 # Setup completions
 #autoload -Uz compinit
-compinit -u
-fpath=(~/.config/zsh/completions $fpath)
+#compinit -u
+#fpath=(~/.config/zsh/completions $fpath)
 
 export PATH="$HOME/bin:$PATH"
 
@@ -75,3 +74,6 @@ fi
 
 # this will attach to an ongoing tmux session or start a new one
 # the session name will be the name of the user ($USER)
+export PATH="$HOME/.config/bin:$PATH"
+
+exec fish
