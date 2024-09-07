@@ -8,7 +8,3 @@ Dotfiles setup for MacOS and different Linux Distro's
 
 - [ ] autojump
 - [ ] installing z
-
-
-
-

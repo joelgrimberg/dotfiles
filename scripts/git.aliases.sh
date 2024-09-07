@@ -180,6 +180,8 @@ function gccd() {
   # otherwise parse the repo URI and use the last part as the directory
   [[ -d "$_" ]] && cd "$_" || cd "${${repo:t}%.git/#}"
 }
+
+
 compdef _git gccd=git-clone
 
 alias gcam='git commit --all --message'

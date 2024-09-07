@@ -188,7 +188,7 @@ return {
 		lazy = true,
 		opts = {},
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("nvimtreesitter.configs").setup({
 				enable_autocmd = false,
 			})
 		end,

@@ -109,12 +109,15 @@ require("lazy").setup({
       }
     end,
   },
-  { "chentoast/marks.nvim", event = "VeryLazy", opts = {} },
-  { "luckasRanarison/tailwind-tools.nvim", opts = {
-    custom_filetypes = {
-      "rescript",
-    },
-  } },
+  { "chentoast/marks.nvim",      event = "VeryLazy", opts = {} },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    opts = {
+      custom_filetypes = {
+        "rescript",
+      },
+    }
+  },
   {
     "stevearc/oil.nvim",
     lazy = true,
@@ -176,7 +179,7 @@ require("lazy").setup({
     "mrcjkb/rustaceanvim",
     lazy = false,
   },
-  { "akinsho/git-conflict.nvim", version = "*", config = true },
+  { "akinsho/git-conflict.nvim", version = "*",      config = true },
   {
     "ruifm/gitlinker.nvim",
     dependencies = {
@@ -301,6 +304,7 @@ require("lazy").setup({
     opts = {
       integrations = {
         treesitter = true,
+
         telescope = true,
         notify = true,
         gitsigns = true,
@@ -424,8 +428,8 @@ require("lazy").setup({
     opts = {
       opts = {
         -- Defaults
-        enable_close = true, -- Auto close tags
-        enable_rename = true, -- Auto rename pairs of tags
+        enable_close = true,           -- Auto close tags
+        enable_rename = true,          -- Auto rename pairs of tags
         enable_close_on_slash = false, -- Auto close on trailing </
       },
     },
@@ -474,7 +478,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>w", function()
         harpoon:list():select(2)
       end, { desc = "Harpoon #2" })
-      vim.keymap.set("n", "<leader>e", function()
+      vim.keymap.set("n", "<leader>x", function()
         harpoon:list():select(3)
       end, { desc = "Harpoon #3" })
       vim.keymap.set("n", "<leader>r", function()
@@ -521,6 +525,7 @@ require("lazy").setup({
           "vim",
           "rescript",
           "markdown",
+          "markdown_inline",
           "wgsl",
           "html",
           "ocaml",
@@ -717,20 +722,19 @@ require("lazy").setup({
           c = { "clang-format" },
           cpp = { "clang-format" },
           python = { "isort", "black" },
-          javascript = { { "prettierd", "prettier" } },
-          markdown = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
-          css = { { "prettierd", "prettier" } },
-          svg = { { "xmlformat" } },
-          json = { { "prettierd", "prettier" } },
-          yaml = { { "prettierd", "prettier" } },
-          graphql = { { "prettierd", "prettier" } },
+          javascript =  { "prettierd", "prettier" } ,
+          markdown = { "prettierd", "prettier" } ,
+          typescript = { "prettierd", "prettier" } ,
+          typescriptreact = { "prettierd", "prettier" } ,
+          css = { "prettierd", "prettier" } ,
+          svg = { "xmlformat" } },
+          json = { "prettierd", "prettier" } ,
+          yaml = { "prettierd", "prettier" } ,
+          graphql = { "prettierd", "prettier" } ,
           rescript = { "rescript-format" },
           ocaml = { "ocamlformat" },
           sql = { "pg_format" },
-        },
-      }
+        }
 
       local function format()
         require("conform").format {
@@ -911,7 +915,7 @@ local servers = {
     },
   },
   eslint = {
-    filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+    filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact","markdown" },
   },
   tsserver = {
     typescript = {
@@ -930,6 +934,7 @@ local servers = {
   lua_ls = {
     Lua = {
       runtime = {
+
         version = "LuaJIT",
       },
       workspace = { checkThirdParty = false },
@@ -940,9 +945,13 @@ local servers = {
     single_file_support = false,
     init_options = { diagnosticSeverity = "WARN" },
   },
+  markdown_oxide = {
+    single_file_support = false,
+    init_options = { diagnosticSeverity = "WARN" },
+  },
   marksman = {
     cmd = {
-     "marksman", "server"
+      "marksman", "server"
     },
     filetypes = { "markdown", "markdown.mdx" }
 
@@ -958,7 +967,7 @@ require("neodev").setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- it then vim cmp overrides only completion part of the text document. leave all other preassigned
 capabilities.textDocument.completion =
-  require("cmp_nvim_lsp").default_capabilities(capabilities).textDocument.completion
+    require("cmp_nvim_lsp").default_capabilities(capabilities).textDocument.completion
 
 -- optimizes cpu usage source https://github.com/neovim/neovim/issues/23291
 capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false

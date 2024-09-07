@@ -1,3 +1,7 @@
+# Initialize Completions
+autoload -Uz compinit
+compinit 
+
 # Setting the history
 #set history size
 export HISTSIZE=10000
@@ -25,7 +29,7 @@ function chpwd() {
 
 #eval "$(zoxide init zsh)"
 
-eval "$(fnm env --use-on-cd --shell zsh)"
+#eval "$(fnm env --use-on-cd --shell fish)"
 
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 export PATH="/Users/joelgrimberg/.local/share/nvim/mason/bin:$PATH"
@@ -41,8 +45,8 @@ export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-#source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ~/scripts/random.aliases.sh
 source ~/scripts/git.aliases.sh
@@ -50,8 +54,8 @@ source ~/scripts/kubernetes.aliases.sh
 
 # Setup completions
 #autoload -Uz compinit
-#compinit -u
-#fpath=(~/.config/zsh/completions $fpath)
+compinit -u
+fpath=(~/.config/zsh/completions $fpath)
 
 export PATH="$HOME/bin:$PATH"
 
@@ -77,3 +81,5 @@ fi
 export PATH="$HOME/.config/bin:$PATH"
 
 exec fish
+
+PATH=~/.console-ninja/.bin:$PATH
