@@ -9,7 +9,14 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+#if status is-interactive
+#and not set -q TMUX
+#    exec tmux
+#end
+
+#eval (tmuxifier init - fish)
 fnm env --use-on-cd --shell fish | source
+
 starship init fish | source
 zoxide init fish | source
 

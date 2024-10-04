@@ -23,17 +23,23 @@ function chpwd() {
   ls -a 
 }
 
+export PATH="$HOME/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
+export PATH="/opt/homebrew/bin/:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
 #[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 #eval "$(starship init zsh)"
 
 #eval "$(zoxide init zsh)"
 
-#eval "$(fnm env --use-on-cd --shell fish)"
+# eval "$(fnm env --use-on-cd --shell fish)"
 
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 export PATH="/Users/joelgrimberg/.local/share/nvim/mason/bin:$PATH"
-eval "$(tmuxifier init -)"
+#eval "$(tmuxifier init -)"
 
 
 export BAT_THEME="Catppuccin Mocha"
@@ -57,15 +63,10 @@ source ~/scripts/kubernetes.aliases.sh
 compinit -u
 fpath=(~/.config/zsh/completions $fpath)
 
-export PATH="$HOME/bin:$PATH"
 
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-
-if [[ ! $(tmux list-sessions) ]]; then 
-  tmux
-fi
+#if [[ ! $(tmux list-sessions) ]]; then 
+#  tmux
+#fi
 
 bash ~/scripts/joelgrimberg.ascii.sh
 

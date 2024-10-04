@@ -83,6 +83,34 @@ local if_not_vscode = function()
 end
 
 require("lazy").setup({
+  "mfussenegger/nvim-lint",
+  optional = true,
+  opts = {
+    linters = {
+      -- https://github.com/LazyVim/LazyVim/discussions/4094#discussioncomment-10178217
+      ["markdownlint-cli2"] = {
+        args = { "--config", os.getenv("HOME") .. ".markdownlint.yaml" },
+      },
+    },
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+    },
+    build = "make tiktoken",        -- Only on MacOS or Linux
+    opts = {
+      debug = true,                 -- Enable debugging
+      window = {
+        width = 30,
+        col = 5, -- 50% width
+      },
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
   "github/copilot.vim",
   -- Git management
   "tpope/vim-fugitive",
@@ -117,6 +145,11 @@ require("lazy").setup({
         "rescript",
       },
     }
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   },
   {
     "stevearc/oil.nvim",
@@ -374,6 +407,18 @@ require("lazy").setup({
         },
       }
 
+      local function wordcount()
+        return tostring(vim.fn.wordcount().words) .. ' words'
+      end
+
+      local function readingtime()
+        return tostring(math.ceil(vim.fn.wordcount().words / 200.0)) .. ' min'
+      end
+
+      local function is_markdown()
+        return vim.bo.filetype == "markdown" or vim.bo.filetype == "asciidoc"
+      end
+
       require("lualine").setup {
         options = {
           disabled_filetypes = {
@@ -391,7 +436,10 @@ require("lazy").setup({
             end,
           },
           lualine_x = { "filetype" },
-          lualine_y = {},
+          lualine_y = {
+            { wordcount,   cond = is_markdown },
+            { readingtime, cond = is_markdown }
+          },
           lualine_z = { { "os.date('󱑈 %H:%M')", color = { fg = "#363a4f", gui = "bold" } } },
         },
       }
@@ -489,7 +537,13 @@ require("lazy").setup({
       end, { desc = "Harpoon #5" })
     end,
   },
-
+  {
+    'jmbuhr/otter.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {},
+  },
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
@@ -536,7 +590,7 @@ require("lazy").setup({
         highlight = {
           enable = true,
           use_languagetree = true,
-          additional_vim_regex_highlighting = false,
+          additional_vim_regex_highlighting = { 'markdown' },
         },
         indent = { enable = true },
         incremental_selection = {
@@ -722,19 +776,19 @@ require("lazy").setup({
           c = { "clang-format" },
           cpp = { "clang-format" },
           python = { "isort", "black" },
-          javascript =  { "prettierd", "prettier" } ,
-          markdown = { "prettierd", "prettier" } ,
-          typescript = { "prettierd", "prettier" } ,
-          typescriptreact = { "prettierd", "prettier" } ,
-          css = { "prettierd", "prettier" } ,
+          javascript = { "prettierd", "prettier" },
+          markdown = { "prettierd", "prettier" },
+          typescript = { "prettierd", "prettier" },
+          typescriptreact = { "prettierd", "prettier" },
+          css = { "prettierd", "prettier" },
           svg = { "xmlformat" } },
-          json = { "prettierd", "prettier" } ,
-          yaml = { "prettierd", "prettier" } ,
-          graphql = { "prettierd", "prettier" } ,
-          rescript = { "rescript-format" },
-          ocaml = { "ocamlformat" },
-          sql = { "pg_format" },
-        }
+        json = { "prettierd", "prettier" },
+        yaml = { "prettierd", "prettier" },
+        graphql = { "prettierd", "prettier" },
+        rescript = { "rescript-format" },
+        ocaml = { "ocamlformat" },
+        sql = { "pg_format" },
+      }
 
       local function format()
         require("conform").format {
@@ -806,11 +860,25 @@ require("lazy").setup({
     },
   },
 
+  {
+    "Zeioth/markmap.nvim",
+    build = "yarn global add markmap-cli",
+    cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
+    opts = {
+      html_output = "markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
+      hide_toolbar = false,         -- (default)
+      grace_period = 3600000        -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
+    },
+    config = function(_, opts) require("markmap").setup(opts) end
+  },
+
+
   -- Follow up with the custom reusable configuration for plugins located in ~/lua folder
   require("telescope-lazy").lazy {},
   require("alpha-lazy").lazy {},
   require("dap-lazy").lazy {},
   require("hop-lazy").lazy {},
+  require("go").lazy {},
   require "sidebar",
 }, {})
 
@@ -915,9 +983,9 @@ local servers = {
     },
   },
   eslint = {
-    filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact","markdown" },
+    filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "markdown" },
   },
-  tsserver = {
+  ts_ls = {
     typescript = {
       inlayHints = {
         includeInlayEnumMemberValueHints = false,
@@ -1179,7 +1247,13 @@ vim.api.nvim_set_keymap("n", "<D-A-q>", "<C-w>q", { silent = true })
 vim.api.nvim_set_keymap("n", "<D-A-j>", "<C-w>j", { silent = true })
 vim.api.nvim_set_keymap("n", "<D-A-k>", "<C-w>k", { silent = true })
 
-vim.keymap.set({ "n" }, "<D-s>", "<cmd>w<CR>", { silent = true, desc = "Save file" })
+local function format_and_save()
+  vim.cmd "Format"
+  vim.cmd "w"
+end
+
+vim.keymap.set({ "n", "i" }, "<D-s>", format_and_save, { silent = true, desc = "Save file" })
+-- vim.keymap.set({ "n", "i" }, "<D-s>", "<cmd>w<CR>", { silent = true, desc = "Save file" })
 
 -- Swap the p and P to not mess up the clipbard with replaced text
 -- but leave the ability to paste the text

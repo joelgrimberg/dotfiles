@@ -25,10 +25,10 @@ return {
 			require("glance").setup()
 		end,
 		keys = {
-			{ "gD", "<CMD>Glance definitions<CR>", desc = "Glance definitions" },
-			{ "gR", "<CMD>Glance references<CR>", desc = "Glance references" },
+			{ "gD", "<CMD>Glance definitions<CR>",      desc = "Glance definitions" },
+			{ "gR", "<CMD>Glance references<CR>",       desc = "Glance references" },
 			{ "gY", "<CMD>Glance type_definitions<CR>", desc = "Glance type_definitions" },
-			{ "gM", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
+			{ "gM", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
 		},
 	},
 	{
@@ -36,7 +36,7 @@ return {
 		config = function()
 			require("neoscroll").setup({
 				stop_eof = true,
-				easing_function = "sine",
+				-- easing_function = "sine",
 				hide_cursor = true,
 				-- respect_scrolloff = true,
 				cursor_scrolls_alone = true,
@@ -59,7 +59,7 @@ return {
 			})
 		end,
 	},
-	{ "folke/neodev.nvim", opts = {} },
+	{ "folke/neodev.nvim",    opts = {} },
 	{
 		"echasnovski/mini.pairs",
 		event = "VeryLazy",
@@ -82,8 +82,8 @@ return {
 	{
 		"ggandor/leap.nvim",
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+			{ "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+			{ "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
 			{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
 		},
 		config = function(_, opts)
@@ -202,7 +202,8 @@ return {
 			require("mini.comment").setup({
 				options = {
 					custom_commentstring = function()
-						return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
+						return require("ts_context_commentstring").calculate_commentstring() or
+						    vim.bo.commentstring
 					end,
 				},
 			})

@@ -12,7 +12,7 @@ return {
       vim.api.nvim_set_hl(0, "EdgyNormal", { bg = catpuccin.mantle })
 
       vim.keymap.set("n", "<D-b>", function()
-        edgy.toggle "left"
+        edgy.toggle "right"
       end, { desc = "Toggle sidebar" })
     end,
     dependencies = {
@@ -42,6 +42,30 @@ return {
           open_no_results = true,
           pinned = true,
           multiline = false,
+          filter = {
+            -- remove Package since luals uses it for control flow structures
+            ["not"] = { ft = "lua", kind = "Package" },
+            any = {
+              -- all symbol kinds for help / markdown files
+              ft = { "help", "markdown" },
+              -- default set of symbol kinds
+              kind = {
+                "Class",
+                "Constructor",
+                "Enum",
+                "Field",
+                "Function",
+                "Interface",
+                "Method",
+                "Module",
+                "Namespace",
+                "Package",
+                "Property",
+                "Struct",
+                "Trait",
+              },
+            },
+          },
         }, -- for default options, refer to the configuration section for custom setup.
         init = function()
           vim.api.nvim_create_autocmd("BufReadPost", {
@@ -55,13 +79,13 @@ return {
     },
     opts = {
       options = {
-        left = {
+        right = {
           size = 35,
         },
       },
       exit_when_last = true,
       close_when_all_hidden = false,
-      left = {
+      right = {
         {
           ft = "trouble",
           pinned = true,
@@ -69,7 +93,7 @@ return {
           filter = function(_buf, win)
             return vim.w[win].trouble.mode == "symbols"
           end,
-          open = "Trouble symbols position=left focus=false filter.buf=0",
+          open = "Trouble symbols position=right focus=false filter.buf=0",
           size = { height = 0.6 },
         },
         {
@@ -79,7 +103,7 @@ return {
           filter = function(_buf, win)
             return vim.w[win].trouble.mode == "diagnostics"
           end,
-          open = "Trouble diagnostics focus=false filter.severity=vim.diagnostic.severity.ERROR",
+          open = "Trouble diagnostics focus=false filter.severity=vim.diagnostic.severity.HINT",
           size = { height = 0.4 },
         },
       },

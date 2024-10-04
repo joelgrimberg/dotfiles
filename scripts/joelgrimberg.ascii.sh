@@ -26,3 +26,5 @@ for i in "${!lines[@]}"; do
   color_index=$((i % ${#colors[@]}))
   echo -e "${colors[color_index]}${lines[i]}"
 done
+
+echo "let's create a great day!"
