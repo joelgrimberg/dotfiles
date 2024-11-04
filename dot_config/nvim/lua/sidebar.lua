@@ -34,6 +34,11 @@ return {
             "<cmd>Trouble loclist toggle<cr>",
             desc = "Location List (Trouble)",
           },
+          {
+            "<leader>td",
+            "<cmd>TodoLocList <cr>",
+            desc = "Todo List",
+          }
         },
         opts = {
           restore = false,
@@ -42,30 +47,6 @@ return {
           open_no_results = true,
           pinned = true,
           multiline = false,
-          filter = {
-            -- remove Package since luals uses it for control flow structures
-            ["not"] = { ft = "lua", kind = "Package" },
-            any = {
-              -- all symbol kinds for help / markdown files
-              ft = { "help", "markdown" },
-              -- default set of symbol kinds
-              kind = {
-                "Class",
-                "Constructor",
-                "Enum",
-                "Field",
-                "Function",
-                "Interface",
-                "Method",
-                "Module",
-                "Namespace",
-                "Package",
-                "Property",
-                "Struct",
-                "Trait",
-              },
-            },
-          },
         }, -- for default options, refer to the configuration section for custom setup.
         init = function()
           vim.api.nvim_create_autocmd("BufReadPost", {
@@ -79,7 +60,7 @@ return {
     },
     opts = {
       options = {
-        right = {
+        left = {
           size = 35,
         },
       },
@@ -103,7 +84,17 @@ return {
           filter = function(_buf, win)
             return vim.w[win].trouble.mode == "diagnostics"
           end,
-          open = "Trouble diagnostics focus=false filter.severity=vim.diagnostic.severity.HINT",
+          open = "Trouble diagnostics focus=false filter.severity=vim.diagnostic.severity.Warning",
+          size = { height = 0.4 },
+        },
+        {
+          ft = "trouble",
+          pinned = true,
+          title = "Todos",
+          -- filter = function(_buf, win)
+          --   return vim.w[win].trouble.mode == "diagn"
+          -- end,
+          open = "Trouble todo filter = {tag={TODO,FIX,FIXME,INFO}}",
           size = { height = 0.4 },
         },
       },

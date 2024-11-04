@@ -61,6 +61,9 @@ local function lazy(_options)
         end,
       },
       {
+        'leoluz/nvim-dap-go',
+      },
+      {
         "rcarriga/nvim-dap-ui",
         types = true,
       },
