@@ -14,6 +14,8 @@ end
 #    exec tmux
 #end
 
+source ~/.config/fish/path.fish
+
 #eval (tmuxifier init - fish)
 fnm env --use-on-cd --shell fish | source
 

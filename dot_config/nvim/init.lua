@@ -51,9 +51,6 @@ vim.o.scrolloff = 10
 -- Highlight current line as cursor
 vim.o.cursorline = true
 
--- Set completeopt to have a better completion experience
-
-
 -- set termguicolors to enable highlight groups
 vim.o.termguicolors = true
 
@@ -93,7 +90,7 @@ require("lazy").setup({
     linters = {
       -- https://github.com/LazyVim/LazyVim/discussions/4094#discussioncomment-10178217
       ["markdownlint-cli2"] = {
-        args = { "--config", os.getenv("HOME") .. ".markdownlint.yaml" },
+        args = { "--config", os.getenv "HOME" .. ".markdownlint.yaml" },
       },
     },
   },
@@ -101,7 +98,7 @@ require("lazy").setup({
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      signs = true,      -- show icons in the signs column
+      signs = true, -- show icons in the signs column
       sign_priority = 8, -- sign priority
       -- keywords recognized as todo comments
       keywords = {
@@ -125,23 +122,23 @@ require("lazy").setup({
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     keys = {
       { "<C-M-s>", "<cmd>CopilotChatToggle<cr>", desc = "Toggle CopilotChat" },
-      { "<C-M-h>", "<cmd>wincmd h<cr>",          desc = "Move to left window" },
-      { "<C-M-l>", "<cmd>wincmd l<cr>",          desc = "Move to right window" },
+      { "<C-M-h>", "<cmd>wincmd h<cr>", desc = "Move to left window" },
+      { "<C-M-l>", "<cmd>wincmd l<cr>", desc = "Move to right window" },
     },
     branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
-    build = "make tiktoken",        -- Only on MacOS or Linux
+    build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
-      debug = true,                 -- Enable debugging
+      debug = true, -- Enable debugging
       window = {
 
         width = 80,
@@ -151,51 +148,6 @@ require("lazy").setup({
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
-
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",      -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  },
-
 
   "github/copilot.vim",
   -- Git management
@@ -223,22 +175,22 @@ require("lazy").setup({
       }
     end,
   },
-  { "chentoast/marks.nvim",      event = "VeryLazy", opts = {} },
+  { "chentoast/marks.nvim", event = "VeryLazy", opts = {} },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   opts = {
+  --     custom_filetypes = {
+  --       "rescript",
+  --     },
+  --   }
+  -- },
   {
-    "luckasRanarison/tailwind-tools.nvim",
+    "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      custom_filetypes = {
-        "rescript",
-      },
-    }
-  },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    opts = {
-      file_types = { "markdown", "Avante" },
+      file_types = { "markdown" },
     },
-    ft = { "markdown", "Avante" },
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ft = { "markdown" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
   },
   {
     "stevearc/oil.nvim",
@@ -301,7 +253,7 @@ require("lazy").setup({
     "mrcjkb/rustaceanvim",
     lazy = false,
   },
-  { "akinsho/git-conflict.nvim", version = "*",      config = true },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "ruifm/gitlinker.nvim",
     dependencies = {
@@ -351,7 +303,6 @@ require("lazy").setup({
     },
   },
 
-
   {
     -- Autocompletion
     "hrsh7th/nvim-cmp",
@@ -371,7 +322,6 @@ require("lazy").setup({
       -- 'rafamadriz/friendly-snippets',
     },
   },
-
 
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -500,11 +450,11 @@ require("lazy").setup({
       }
 
       local function wordcount()
-        return tostring(vim.fn.wordcount().words) .. ' words'
+        return tostring(vim.fn.wordcount().words) .. " words"
       end
 
       local function readingtime()
-        return tostring(math.ceil(vim.fn.wordcount().words / 200.0)) .. ' min'
+        return tostring(math.ceil(vim.fn.wordcount().words / 200.0)) .. " min"
       end
 
       local function is_markdown()
@@ -529,8 +479,8 @@ require("lazy").setup({
           },
           lualine_x = { "filetype" },
           lualine_y = {
-            { wordcount,   cond = is_markdown },
-            { readingtime, cond = is_markdown }
+            { wordcount, cond = is_markdown },
+            { readingtime, cond = is_markdown },
           },
           lualine_z = { { "os.date('󱑈 %H:%M')", color = { fg = "#363a4f", gui = "bold" } } },
         },
@@ -568,8 +518,8 @@ require("lazy").setup({
     opts = {
       opts = {
         -- Defaults
-        enable_close = true,           -- Auto close tags
-        enable_rename = true,          -- Auto rename pairs of tags
+        enable_close = true, -- Auto close tags
+        enable_rename = true, -- Auto rename pairs of tags
         enable_close_on_slash = false, -- Auto close on trailing </
       },
     },
@@ -630,9 +580,9 @@ require("lazy").setup({
     end,
   },
   {
-    'jmbuhr/otter.nvim',
+    "jmbuhr/otter.nvim",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
+      "nvim-treesitter/nvim-treesitter",
     },
     opts = {},
   },
@@ -669,7 +619,7 @@ require("lazy").setup({
           "typescript",
           "vimdoc",
           "vim",
-          "rescript",
+          -- "rescript",
           "markdown",
           "markdown_inline",
           "wgsl",
@@ -682,7 +632,7 @@ require("lazy").setup({
         highlight = {
           enable = true,
           use_languagetree = true,
-          additional_vim_regex_highlighting = { 'markdown' },
+          additional_vim_regex_highlighting = { "markdown" },
         },
         indent = { enable = true },
         incremental_selection = {
@@ -873,7 +823,8 @@ require("lazy").setup({
           typescript = { "prettierd", "prettier" },
           typescriptreact = { "prettierd", "prettier" },
           css = { "prettierd", "prettier" },
-          svg = { "xmlformat" } },
+          svg = { "xmlformat" },
+        },
         json = { "prettierd", "prettier" },
         yaml = { "prettierd", "prettier" },
         graphql = { "prettierd", "prettier" },
@@ -898,10 +849,10 @@ require("lazy").setup({
     opts = {
       preset = "modern",
     },
-    keys = {
-      mode = { "n", "v" },
-      { "<leader>mf", group = "[P]fold" },
-    },
+    -- keys = {
+    -- mode = { "n", "v" },
+    -- { "<leader>mf", group = "[P]fold" },
+    -- },
   },
 
   {
@@ -962,12 +913,13 @@ require("lazy").setup({
     cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
     opts = {
       html_output = "markmap.html", -- (default) Setting a empty string "" here means: [Current buffer path].html
-      hide_toolbar = false,         -- (default)
-      grace_period = 3600000        -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
+      hide_toolbar = false, -- (default)
+      grace_period = 3600000, -- (default) Stops markmap watch after 60 minutes. Set it to 0 to disable the grace_period.
     },
-    config = function(_, opts) require("markmap").setup(opts) end
+    config = function(_, opts)
+      require("markmap").setup(opts)
+    end,
   },
-
 
   -- Follow up with the custom reusable configuration for plugins located in ~/lua folder
   require("telescope-lazy").lazy {},
@@ -976,7 +928,6 @@ require("lazy").setup({
   require("hop-lazy").lazy {},
   require("go").lazy {},
   require "sidebar",
-  -- require("avante").lazy {}
 }, {})
 
 -- require('avante_lib').load()
@@ -1000,8 +951,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         end
       end
     end
-    vim.lsp.buf.format({ async = false })
-  end
+    vim.lsp.buf.format { async = false }
+  end,
 })
 
 -- [[ Custom Autocmds]]
@@ -1025,13 +976,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "ocaml" },
-  callback = function()
-    vim.keymap.set("i", ";", " in")
-    vim.keymap.set("i", ";;", ";")
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "ocaml" },
+--   callback = function()
+--     vim.keymap.set("i", ";", " in")
+--     vim.keymap.set("i", ";;", ";")
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
@@ -1061,15 +1012,11 @@ local on_lsp_attach = function(client, bufnr)
 
   -- setup Markdown Oxide daily note commands
   if client.name == "markdown_oxide" then
-    vim.api.nvim_create_user_command(
-      "Daily",
-      function(args)
-        local input = args.args
+    vim.api.nvim_create_user_command("Daily", function(args)
+      local input = args.args
 
-        vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
-      end,
-      { desc = 'Open daily note', nargs = "*" }
-    )
+      vim.lsp.buf.execute_command { command = "jump", arguments = { input } }
+    end, { desc = "Open daily note", nargs = "*" })
   end
 
   -- if vim.bo.filetype == "rust" then
@@ -1155,10 +1102,10 @@ local servers = {
   },
   marksman = {
     cmd = {
-      "marksman", "server"
+      "marksman",
+      "server",
     },
-    filetypes = { "markdown", "markdown.mdx" }
-
+    filetypes = { "markdown", "markdown.mdx" },
   },
   pylsp = {},
   astro = {},
@@ -1170,29 +1117,24 @@ require("neodev").setup()
 -- An example nvim-lspconfig capabilities setting
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require("lspconfig").markdown_oxide.setup({
+require("lspconfig").markdown_oxide.setup {
   -- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
   -- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
-  capabilities = vim.tbl_deep_extend(
-    'force',
-    capabilities,
-    {
-      workspace = {
-        didChangeWatchedFiles = {
-          dynamicRegistration = true,
-        },
+  capabilities = vim.tbl_deep_extend("force", capabilities, {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
       },
-    }
-  ),
-  on_attach = on_attach -- configure your on attach config
-})
-
+    },
+  }),
+  on_attach = on_attach, -- configure your on attach config
+}
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- it then vim cmp overrides only completion part of the text document. leave all other preassigned
 capabilities.textDocument.completion =
-    require("cmp_nvim_lsp").default_capabilities(capabilities).textDocument.completion
+  require("cmp_nvim_lsp").default_capabilities(capabilities).textDocument.completion
 
 -- optimizes cpu usage source https://github.com/neovim/neovim/issues/23291
 -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
@@ -1260,15 +1202,15 @@ require("lspconfig").ocamllsp.setup {
 }
 
 require("lspconfig").gopls.setup {
-  require("lspconfig").gopls.setup({
+  require("lspconfig").gopls.setup {
     on_attach = function(client, bufnr)
       mappings(client, bufnr)
-      require("lsp-inlayhints").setup({
+      require("lsp-inlayhints").setup {
         inlay_hints = {
           parameter_hints = { prefix = "in: " }, -- "<- "
-          type_hints = { prefix = "out: " }      -- "=> "
-        }
-      })
+          type_hints = { prefix = "out: " }, -- "=> "
+        },
+      }
       require("lsp-inlayhints").on_attach(client, bufnr)
       require("illuminate").on_attach(client)
 
@@ -1291,30 +1233,25 @@ require("lspconfig").gopls.setup {
       -- Instead I use https://github.com/incu6us/goimports-reviser
       -- Via https://github.com/stevearc/conform.nvim
       --
-      -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      --   group = vim.api.nvim_create_augroup("FixGoImports",
-      --     { clear = true }),
-      --   pattern = "*.go",
-      --   callback = function()
-      --     -- ensure imports are sorted and grouped correctly
-      --     local params = vim.lsp.util.make_range_params()
-      --     params.context = { only = { "source.organizeImports" } }
-      --     local result =
-      --         vim.lsp.buf_request_sync(0,
-      --           "textDocument/codeAction",
-      --           params)
-      --     for _, res in pairs(result or {}) do
-      --       for _, r in pairs(res.result or {}) do
-      --         if r.edit then
-      --           vim.lsp.util.apply_workspace_edit(
-      --             r.edit, "UTF-8")
-      --         else
-      --           vim.lsp.buf.execute_command(r.command)
-      --         end
-      --       end
-      --     end
-      --   end
-      -- })
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = vim.api.nvim_create_augroup("FixGoImports", { clear = true }),
+        pattern = "*.go",
+        callback = function()
+          -- ensure imports are sorted and grouped correctly
+          local params = vim.lsp.util.make_range_params()
+          params.context = { only = { "source.organizeImports" } }
+          local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+          for _, res in pairs(result or {}) do
+            for _, r in pairs(res.result or {}) do
+              if r.edit then
+                vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+              else
+                vim.lsp.buf.execute_command(r.command)
+              end
+            end
+          end
+        end,
+      })
 
       -- DISABLED:
       -- I don't use revive separately anymore. It's only used via golangci-lint.
@@ -1337,7 +1274,7 @@ require("lspconfig").gopls.setup {
           nilness = true,
           unusedparams = true,
           unusedwrite = true,
-          useany = true
+          useany = true,
         },
         codelenses = {
           gc_details = false,
@@ -1357,7 +1294,7 @@ require("lspconfig").gopls.setup {
           constantValues = true,
           functionTypeParameters = true,
           parameterNames = true,
-          rangeVariableTypes = true
+          rangeVariableTypes = true,
         },
         gofumpt = true,
         semanticTokens = true,
@@ -1378,13 +1315,13 @@ require("lspconfig").gopls.setup {
         --
         -- staticcheck = true,
         usePlaceholders = true,
-      }
-    }
+      },
+    },
     -- DISABLED: as it overlaps with `lvimuser/lsp-inlayhints.nvim`
     -- init_options = {
     --   usePlaceholders = true,
     -- }
-  })
+  },
 }
 
 require("lspconfig").yamlls.setup {
@@ -1586,30 +1523,34 @@ vim.keymap.set("n", "<C-t>", "%", { remap = true })
 --                           Folding section
 -------------------------------------------------------------------------------
 
-
 -- Use <CR> to fold when in normal mode
 -- To see help about folds use `:help fold`
 vim.keymap.set("n", "<CR>", function()
   -- Get the current line number
-  local line = vim.fn.line(".")
+  local line = vim.fn.line "."
   -- Get the fold level of the current line
   local foldlevel = vim.fn.foldlevel(line)
+  -- vim.notify("Fold level: " .. foldlevel, vim.log.levels.INFO)
   if foldlevel == 0 then
     vim.notify("No fold found", vim.log.levels.INFO)
   else
-    vim.cmd("normal! za")
+    vim.notify("Fold found", vim.log.levels.INFO)
+    vim.cmd "normal! za"
   end
 end, { desc = "[P]Toggle fold" })
 
 local function set_foldmethod_expr()
+  vim.notify("Setting foldmethod to expr", vim.log.levels.INFO)
   -- These are lazyvim.org defaults but setting them just in case a file
   -- doesn't have them set
-  if vim.fn.has("nvim-0.10") == 1 then
+  if vim.fn.has "nvim-0.10" == 1 then
+    vim.notify("Setting foldmethod to expr", vim.log.levels.INFO)
     vim.opt.foldmethod = "expr"
     vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
     vim.opt.foldtext = ""
   else
     vim.opt.foldmethod = "indent"
+    vim.notify("Setting foldmethod to indent", vim.log.levels.INFO)
     vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
   end
   vim.opt.foldlevel = 99
@@ -1617,10 +1558,11 @@ end
 
 -- Function to fold all headings of a specific level
 local function fold_headings_of_level(level)
+  -- vim.notify("Folding level " .. level, vim.log.levels.INFO)
   -- Move to the top of the file
-  vim.cmd("normal! gg")
-  -- Get the total number of lines
-  local total_lines = vim.fn.line("$")
+  vim.cmd "normal! gg"
+  -- Get the total number of lines:
+  local total_lines = vim.fn.line "$"
   for line = 1, total_lines do
     -- Get the content of the current line
     local line_content = vim.fn.getline(line)
@@ -1633,20 +1575,22 @@ local function fold_headings_of_level(level)
       vim.fn.cursor(line, 1)
       -- Fold the heading if it matches the level
       if vim.fn.foldclosed(line) == -1 then
-        vim.cmd("normal! za")
+        vim.cmd "normal! za"
       end
     end
   end
 end
 
 local function fold_markdown_headings(levels)
+  vim.notify("Folding markdown headings", vim.log.levels.INFO)
   set_foldmethod_expr()
   -- I save the view to know where to jump back after folding
   local saved_view = vim.fn.winsaveview()
   for _, level in ipairs(levels) do
+    vim.notify("Folding level " .. level, vim.log.levels.INFO)
     fold_headings_of_level(level)
   end
-  vim.cmd("nohlsearch")
+  vim.cmd "nohlsearch"
   -- Restore the view to jump to where I was
   vim.fn.winrestview(saved_view)
 end
@@ -1657,18 +1601,18 @@ end
 vim.keymap.set("n", "zu", function()
   -- vim.keymap.set("n", "<leader>mfu", function()
   -- Reloads the file to reflect the changes
-  vim.cmd("edit!")
-  vim.cmd("normal! zR") -- Unfold all headings
+  vim.cmd "edit!"
+  vim.cmd "normal! zR" -- Unfold all headings
 end, { desc = "[P]Unfold all headings level 2 or above" })
 
 -- Keymap for folding markdown headings of level 1 or above
 vim.keymap.set("n", "zj", function()
   -- vim.keymap.set("n", "<leader>mfj", function()
   -- Reloads the file to refresh folds, otherwise you have to re-open neovim
-  vim.cmd("edit!")
+  vim.cmd "edit!"
   -- Unfold everything first or I had issues
-  vim.cmd("normal! zR")
-  fold_markdown_headings({ 6, 5, 4, 3, 2, 1 })
+  vim.cmd "normal! zR"
+  fold_markdown_headings { 6, 5, 4, 3, 2, 1 }
 end, { desc = "[P]Fold all headings level 1 or above" })
 
 -- Keymap for folding markdown headings of level 2 or above
@@ -1676,38 +1620,35 @@ end, { desc = "[P]Fold all headings level 1 or above" })
 vim.keymap.set("n", "zk", function()
   -- vim.keymap.set("n", "<leader>mfk", function()
   -- Reloads the file to refresh folds, otherwise you have to re-open neovim
-  vim.cmd("edit!")
+  vim.cmd "edit!"
   -- Unfold everything first or I had issues
-  vim.cmd("normal! zR")
-  fold_markdown_headings({ 6, 5, 4, 3, 2 })
+  vim.cmd "normal! zR"
+  fold_markdown_headings { 6, 5, 4, 3, 2 }
 end, { desc = "[P]Fold all headings level 2 or above" })
 
 -- Keymap for folding markdown headings of level 3 or above
 vim.keymap.set("n", "zl", function()
   -- vim.keymap.set("n", "<leader>mfl", function()
   -- Reloads the file to refresh folds, otherwise you have to re-open neovim
-  vim.cmd("edit!")
+  vim.cmd "edit!"
   -- Unfold everything first or I had issues
-  vim.cmd("normal! zR")
-  fold_markdown_headings({ 6, 5, 4, 3 })
+  vim.cmd "normal! zR"
+  fold_markdown_headings { 6, 5, 4, 3 }
 end, { desc = "[P]Fold all headings level 3 or above" })
 
 -- Keymap for folding markdown headings of level 4 or above
 vim.keymap.set("n", "z;", function()
   -- vim.keymap.set("n", "<leader>mf;", function()
   -- Reloads the file to refresh folds, otherwise you have to re-open neovim
-  vim.cmd("edit!")
+  vim.cmd "edit!"
   -- Unfold everything first or I had issues
-  vim.cmd("normal! zR")
-  fold_markdown_headings({ 6, 5, 4 })
+  vim.cmd "normal! zR"
+  fold_markdown_headings { 6, 5, 4 }
 end, { desc = "[P]Fold all headings level 4 or above" })
 
 -------------------------------------------------------------------------------
 --                         End Folding section
 -------------------------------------------------------------------------------
-
-
-
 
 local function open_file_under_cursor_in_the_panel_above()
   local telescope = require "telescope.builtin"
