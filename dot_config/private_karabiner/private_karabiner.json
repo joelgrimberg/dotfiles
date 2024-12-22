@@ -4,7 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "description": "Change caps_lock to command+control+option+shift.",
@@ -23,6 +22,7 @@
                         ]
                     },
                     {
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "description": "Change caps_lock to control+option+shift.",
