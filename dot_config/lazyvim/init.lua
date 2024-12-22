@@ -248,3 +248,55 @@ vim.api.nvim_create_user_command("Format", function(args)
   end
   require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true, desc = "Format current buffer with LSP" })
+
+local on_lsp_attach = function(client, bufnr)
+  local lsp_map = function(keys, func, desc)
+    if desc then
+      desc = "LSP: " .. desc
+    end
+
+    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc, silent = true })
+  end
+
+  -- setup Markdown Oxide daily note commands
+  if client.name == "markdown_oxide" then
+    vim.api.nvim_create_user_command("Daily", function(args)
+      local input = args.args
+
+      vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
+    end, { desc = "Open daily note", nargs = "*" })
+  end
+
+  -- if vim.bo.filetype == "rust" then
+  --   lsp_map("<D-.>", ":RustLsp codeAction<CR>", "[C]ode [A]ction")
+  --   vim.keymap.set("n", "<F4>", ":RustLsp debuggables<CR>", { silent = true, desc = "Rust: Debuggables" })
+  -- else
+  --   lsp_map("<D-.>", require("actions-preview").code_actions, "[C]ode [A]ction")
+  -- end
+  lsp_map("<A-S-.>", require("actions-preview").code_actions, "[C]ode [A]ction")
+
+  lsp_map("<D-r>", require("renamer").rename, "[R]e[n]ame")
+
+  lsp_map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+  lsp_map("gD", vim.lsp.buf.definition, "[G]oto [D]eclaration")
+  lsp_map("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+  lsp_map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+
+  lsp_map("<D-g>", "<C-]>", "[G]oto [D]efinition")
+  lsp_map("<D-A-g>", vim.lsp.buf.type_definition, "Type [D]efinition")
+
+  lsp_map("<D-i>", vim.lsp.buf.hover, "Hover Documentation")
+  lsp_map("<D-u>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+  lsp_map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+  lsp_map("<leader>lr", function()
+    vim.cmd("LspRestart")
+  end, "Lsp [R]eload")
+  lsp_map("<leader>li", function()
+    vim.cmd("LspInfo")
+  end, "Lsp [R]eload")
+  lsp_map("<leader>lh", function()
+    local bufFilter = { bufnr }
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
+  end, "Lsp toggle inlay [h]ints")
+end
