@@ -1,5 +1,21 @@
 #!/bin/sh
 
-LOGGED_USER=$(stat -f%Su /dev/console)
-sudo su $LOGGED_USER -c 'defaults write com.apple.dock mineffect -string scale'
+
+defaults write com.apple.finder ShowHardDrivesOnDesktop 0
+defaults write com.apple.finder ShowMountedServersOnDesktop 0
+defaults write com.apple.finder ShowRemovableMediaOnDesktop 0
+defaults write com.apple.finder ShowStatusBar 0
+defaults write com.apple.finder CreateDesktop false
+defaults write com.apple.finder AppleShowAllFiles -boolean true
+
+defaults write NSGlobalDomain AppleShowAllExtensions -boolean true 
+
+defaults write com.apple.dock mineffect -string "scale"
+defaults write com.apple.dock tilesize -int 32
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock autohide -bool true
+
+defaults delete com.apple.screencapture
+
 killall Dock
+killall Finder

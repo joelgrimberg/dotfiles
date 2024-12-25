@@ -24,11 +24,13 @@ function chpwd() {
 }
 
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
 export PATH="/opt/homebrew/bin/:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications/ --caskroom=/usr/local/Caskroom"
 #[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 #eval "$(starship init zsh)"
