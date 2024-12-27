@@ -34,4 +34,16 @@ else
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/zsh-plugins/zsh-autosuggestions > /dev/null 2>&1
     echo "✅ ${GREEN}zsh-autosuggestions installed ${ENDCOLOR}"
   fi
+
+  if [ -d  "$(bat --config-dir)/themes" ]; then 
+    echo "catppuccin theme for bat already installed"
+  else
+   echo "installing Catppucchin Themes for Bat..the better Cat"
+   mkdir -p "$(bat --config-dir)/themes"
+   wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
+   wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+   wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+   wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+   bat cache --build
+  fi
 fi
