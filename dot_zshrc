@@ -25,65 +25,46 @@ function chpwd() {
 
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="$HOME/homebrew/sbin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
-export PATH="/opt/homebrew/bin/:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications/ --caskroom=/usr/local/Caskroom"
-#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-#eval "$(starship init zsh)"
-
-#eval "$(zoxide init zsh)"
-
-# eval "$(fnm env --use-on-cd --shell fish)"
-
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.config/bin:$PATH"
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
-export PATH="/Users/joelgrimberg/.local/share/nvim/mason/bin:$PATH"
-#eval "$(tmuxifier init -)"
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+export PATH="$HOME/.console-ninja/.bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
-
+export EDITOR="nvim"
+export SUDO_EDITOR="$EDITOR"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export BAT_THEME="Catppuccin Mocha"
 export FZF_CTRL_R_OPTS="--preview 'echo {}'"
 export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always --style=numbers {}'"
 source <(fzf --zsh)
 
-export EDITOR="nvim"
-export SUDO_EDITOR="$EDITOR"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export HOMEBREW_PREFIX=~/usr/local
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications/ --caskroom=/usr/local/Caskroom"
 
 source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-source ~/scripts/random.aliases.sh
-source ~/scripts/git.aliases.sh
-source ~/scripts/kubernetes.aliases.sh
+source $HOME/scripts/random.aliases.sh
+source $HOME/scripts/git.aliases.sh
+source $HOME/scripts/kubernetes.aliases.sh
 
 # Setup completions
 #autoload -Uz compinit
 compinit -u
-fpath=(~/.config/zsh/completions $fpath)
+fpath=($HOME/.config/zsh/completions $fpath)
 
-
-#if [[ ! $(tmux list-sessions) ]]; then 
-#  tmux
-#fi
-
-bash ~/scripts/joelgrimberg.ascii.sh
-
-# inside your .bashrc or .zshrc (on the server side) add:
+bash $HOME/scripts/joelgrimberg.ascii.sh
 
 # start tmux if we ssh into the box
 if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
     tmux attach-session -t $USER || tmux new-session -s $USER
 fi
 
-# this will attach to an ongoing tmux session or start a new one
-# the session name will be the name of the user ($USER)
-export PATH="$HOME/.config/bin:$PATH"
-
 exec fish
-
-PATH=~/.console-ninja/.bin:$PATH
