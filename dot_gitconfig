@@ -15,3 +15,5 @@
 	autoSetupRemote = true
 [alias]
   undo = reset --soft HEAD^
+[safe]
+	directory = /opt/homebrew
