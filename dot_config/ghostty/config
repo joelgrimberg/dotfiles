@@ -6,7 +6,7 @@ font-family = TX-02 SemiCondensed
 
 adjust-cell-height = 20%
 
-command = /Users/joel/homebrew/bin/zellij
+#command = /Users/joel/homebrew/bin/zellij
 
 window-save-state = always
 window-colorspace = display-p3
