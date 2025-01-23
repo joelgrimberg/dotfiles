@@ -111,27 +111,27 @@ return {
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
       }
-      opts.sections.lualine_a = {
-        {
-          function()
-            return ""
-          end,
-          padding = { left = 1, right = 0 },
-          separator = "",
-        },
-        "mode",
-      }
+      -- opts.sections.lualine_a = {
+      --   {
+      --     function()
+      --       return ""
+      --     end,
+      --     padding = { left = 1, right = 0 },
+      --     separator = "",
+      --   },
+      --   "mode",
+      -- }
       opts.sections.lualine_c[4] = { pretty_path({ filename_hl = "Bold", modified_hl = "MatchParen" }) }
-      opts.sections.lualine_y = { "progress" }
-      opts.sections.lualine_z = {
-        { "location", separator = "" },
-        {
-          function()
-            return ""
-          end,
-          padding = { left = 0, right = 1 },
-        },
-      }
+      opts.sections.lualine_y = { "" }
+      -- opts.sections.lualine_z = {
+      --   { "location", separator = "" },
+      --   {
+      --     function()
+      --       return ""
+      --     end,
+      --     padding = { left = 0, right = 1 },
+      --   },
+      -- }
       return opts
     end,
   },
