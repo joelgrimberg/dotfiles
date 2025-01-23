@@ -1,18 +1,18 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
   keys = {
-    { "<C-M-s>", "<cmd>CopilotChatToggle<cr>", desc = "Toggle CopilotChat" },
-    { "<C-M-h>", "<cmd>wincmd h<cr>", desc = "Move to left window" },
-    { "<C-M-l>", "<cmd>wincmd l<cr>", desc = "Move to right window" },
+    { "<D-z>",   "<cmd>CopilotChatToggle<cr>", desc = "Toggle CopilotChat" },
+    { "<C-M-h>", "<cmd>wincmd h<cr>",          desc = "Move to left window" },
+    { "<C-M-l>", "<cmd>wincmd l<cr>",          desc = "Move to right window" },
   },
   branch = "canary",
   dependencies = {
     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-    { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
   },
-  build = "make tiktoken", -- Only on MacOS or Linux
+  build = "make tiktoken",        -- Only on MacOS or Linux
   opts = {
-    debug = true, -- Enable debugging
+    debug = true,                 -- Enable debugging
     window = {
 
       width = 80,
