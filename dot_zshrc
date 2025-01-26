@@ -32,7 +32,6 @@ export PATH="$HOME/.config/bin:$PATH"
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.console-ninja/.bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
@@ -46,8 +45,8 @@ export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always
 source <(fzf --zsh)
 
 export HOMEBREW_PREFIX=~/usr/local
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications/ --caskroom=/usr/local/Caskroom"
 
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications/ --caskroom=~/homebrew/Caskroom"
 source $HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
