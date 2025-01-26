@@ -1,9 +1,14 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
   keys = {
-    { "<D-z>",   "<cmd>CopilotChatToggle<cr>", desc = "Toggle CopilotChat" },
-    { "<C-M-h>", "<cmd>wincmd h<cr>",          desc = "Move to left window" },
-    { "<C-M-l>", "<cmd>wincmd l<cr>",          desc = "Move to right window" },
+    { "<D-z>",      "<cmd>CopilotChatToggle<cr>", desc = "Toggle CopilotChat" },
+    { "<Leader>a",  false },
+    { "<Leader>aa", false },
+    { "<Leader>ap", false },
+    { "<Leader>aq", false },
+    { "<Leader>ax", false },
+    { "<C-M-h>",    "<cmd>wincmd h<cr>",          desc = "Move to left window" },
+    { "<C-M-l>",    "<cmd>wincmd l<cr>",          desc = "Move to right window" },
   },
   branch = "canary",
   dependencies = {
