@@ -125,7 +125,7 @@ local function fold_headings_of_level(level)
     -- "^" -> Ensures the match is at the start of the line
     -- string.rep("#", level) -> Creates a string with 'level' number of "#" characters
     -- "%s" -> Matches any whitespace character after the "#" characters
-    -- So this will match `## `, `### `, `#### ` for example, which are markdown headings
+    -- So this will match `## `, `### `, `#### ` for example, which are arkdown headings
     if line_content:match("^" .. string.rep("#", level) .. "%s") then
       -- Move the cursor to the current line
       vim.fn.cursor(line, 1)
@@ -258,15 +258,6 @@ local on_lsp_attach = function(client, bufnr)
     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc, silent = true })
   end
 
-  -- setup Markdown Oxide daily note commands
-  if client.name == "markdown_oxide" then
-    vim.api.nvim_create_user_command("Daily", function(args)
-      local input = args.args
-
-      vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
-    end, { desc = "Open daily note", nargs = "*" })
-  end
-
   -- if vim.bo.filetype == "rust" then
   --   lsp_map("<D-.>", ":RustLsp codeAction<CR>", "[C]ode [A]ction")
   --   vim.keymap.set("n", "<F4>", ":RustLsp debuggables<CR>", { silent = true, desc = "Rust: Debuggables" })
@@ -300,3 +291,24 @@ local on_lsp_attach = function(client, bufnr)
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
   end, "Lsp toggle inlay [h]ints")
 end
+
+local function check_codelens_support()
+  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  for _, c in ipairs(clients) do
+    if c.server_capabilities.codeLensProvider then
+      return true
+    end
+  end
+  return false
+end
+
+vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
+  buffer = bufnr,
+  callback = function()
+    if check_codelens_support() then
+      vim.lsp.codelens.refresh({ bufnr = 0 })
+    end
+  end,
+})
+-- trigger codelens refresh
+vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
