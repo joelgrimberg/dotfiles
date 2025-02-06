@@ -17,3 +17,5 @@
   undo = reset --soft HEAD^
 [safe]
 	directory = /opt/homebrew
+[pull]
+	rebase = false
