@@ -88,3 +88,6 @@ vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>nohlsearch<CR>", { silent = true
 
 --  Pull one line down useful rempaps from the numeric line
 vim.keymap.set("n", "<C-t>", "%", { remap = true })
+
+vim.keymap.set("n", "<D-A-[>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<D-A-]>", "<C-w>l", { noremap = true, silent = true })
