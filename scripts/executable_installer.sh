@@ -91,7 +91,7 @@ else
   echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
 
   ## Login GH to create a ssh key
-  gh auth login
+  gh auth login --hostname GITHUB.COM -p ssh --skip-ssh-key --web
   
   ## clone fonts
   git clone --depth=1 git@github.com:joelgrimberg/Berkeley-Mono-Fonts.git /Library/Fonts
