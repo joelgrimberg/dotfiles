@@ -28,7 +28,7 @@ mouse-scroll-multiplier = 1.5
 # keybindings
 keybind = cmd+s>r=reload_config
 keybind = cmd+s>x=close_surface
-
+keybind = cmd+s>f=toggle_fullscreen
 keybind = cmd+s>n=new_window
 
 # tabs 
