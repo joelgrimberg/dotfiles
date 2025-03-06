@@ -77,7 +77,7 @@ else
    bat cache --build
   fi
 
-  chezmoi init git@github.com:joelgrimberg/dotfiles.git
+  chezmoi init https://github.com/joelgrimberg/dotfiles.git
   chezmoi apply
 
   brew bundle install
@@ -94,10 +94,12 @@ else
   gh auth login --hostname GITHUB.COM -p ssh --skip-ssh-key --web
   
   ## clone fonts
-  git clone --depth=1 git@github.com:joelgrimberg/Berkeley-Mono-Fonts.git /Library/Fonts
-  rm -rf /Library/Fonts/.git
+  git clone --depth=1 git@github.com:joelgrimberg/Berkeley-Mono-Fonts.git  ~/tmp/
+  mv ~/tmp/* /Library/Fonts/
+  rm -rf ~/tmp
 
 fi
+
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
