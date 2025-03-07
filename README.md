@@ -1,11 +1,12 @@
 # Dotfiles
 
-<!--toc:start-->
-- [Dotfiles](#dotfiles)
-  - [TODO](#todo)
-<!--toc:end-->
+Apply these dotfiles on a fresh install of MacOS to get a nice development
+environment:
 
-## TODO
+```bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply joelgrimberg
+```
 
-- How to install BlockBlock without admin creds
-- Support both macOS and Arch in same dotfiles config
+```
+
+```
