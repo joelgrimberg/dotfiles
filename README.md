@@ -1,10 +1,9 @@
 # Dotfiles
 
 <!--toc:start-->
-
 - [Dotfiles](#dotfiles)
   - [TODO](#todo)
-  <!--toc:end-->
+<!--toc:end-->
 
 ## TODO
 
