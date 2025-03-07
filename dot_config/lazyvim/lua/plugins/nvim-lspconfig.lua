@@ -17,17 +17,6 @@ return {
           end
           local opts = { noremap = true, silent = true }
         end
-
-        require("lspconfig").markdown_oxide.setup({
-          capabilities = vim.tbl_deep_extend("force", capabilities, {
-            workspace = {
-              didChangeWatchedFiles = {
-                dynamicRegistration = true,
-              },
-            },
-          }),
-          on_attach = on_attach,
-        })
       end,
     },
     -- Additional lua configuration, makes nvim stuff amazing!
