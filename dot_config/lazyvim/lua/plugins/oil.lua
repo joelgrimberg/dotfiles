@@ -3,7 +3,7 @@ return {
   lazy = true,
   cmd = "Oil",
   keys = {
-    { "<D-o>", "<cmd>Oil<CR>", silent = true, desc = "Open Oil" },
+    { "<D-S--o>", "<cmd>Oil<CR>", silent = true, desc = "Open Oil" },
   },
   opts = {
     keymaps = {
