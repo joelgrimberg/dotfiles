@@ -4,8 +4,6 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 ENDCOLOR="\e[0m"
 
-# curl https://raw.githubusercontent.com/kentcdodds/dotfiles/HEAD/.macos | bash
-
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
