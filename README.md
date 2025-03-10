@@ -1,8 +1,18 @@
 # Dotfiles
 
-Apply these dotfiles on a fresh install of MacOS to get a nice development
-environment:
+## Ghostty Key Bindings
 
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply joelgrimberg && ./scripts/install.sh
+## LazyVim Key Bindings
+
+[Spelling]
+
+```
+z - = => suggest spelling corrections
+z - g => add word to dictionary
+[ - s  => jump to next misspelled word
+] - s => jump to previous misspelled word
+```
+
+```
+
 ```
