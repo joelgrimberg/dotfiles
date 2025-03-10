@@ -5,6 +5,7 @@ return {
     -- cond = if_not_vscode,
     priority = 1000,
     opts = {
+      transparent_background = true,
       integrations = {
         treesitter = true,
 
