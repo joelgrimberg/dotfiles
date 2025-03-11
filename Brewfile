@@ -179,6 +179,7 @@ brew "z"
 brew "zellij"
 brew "zoxide"
 brew "zsh-autosuggestions"
+brew "zsh-you-should-use"
 brew "caarlos0/tap/mdtree"
 brew "gptscript-ai/tap/clio"
 brew "incu6us/tap/goimports-reviser"
@@ -229,6 +230,7 @@ cask "visual-studio-code"
 cask "whatsapp"
 cask "zen-browser"
 cask "zoom"
+mas "iA Writer", id: 775737590
 mas "Microsoft Outlook", id: 985367838
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
