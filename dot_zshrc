@@ -66,4 +66,6 @@ if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
     tmux attach-session -t $USER || tmux new-session -s $USER
 fi
 
+
+source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
 exec fish
