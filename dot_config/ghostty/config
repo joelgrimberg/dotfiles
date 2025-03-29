@@ -1,7 +1,7 @@
 theme = catppuccin-mocha
 
-background-opacity = 0.50
-#background-opacity = 0.70
+#background-opacity = 0.50
+background-opacity = 0.90
 
 font-size = 14
 font-family = TX-02 SemiCondensed
