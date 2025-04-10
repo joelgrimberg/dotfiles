@@ -1,9 +1,4 @@
--- Project specific marks for most editable files
--- Project specific marks for most editable files
--- Project specific marks for most editable files
-return
--- Project specific marks for most editable files
-{
+return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   commit = "e76cb03",
