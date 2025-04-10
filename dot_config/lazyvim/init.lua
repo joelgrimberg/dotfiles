@@ -261,12 +261,6 @@ local on_lsp_attach = function(client, bufnr)
     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc, silent = true })
   end
 
-  -- if vim.bo.filetype == "rust" then
-  --   lsp_map("<D-.>", ":RustLsp codeAction<CR>", "[C]ode [A]ction")
-  --   vim.keymap.set("n", "<F4>", ":RustLsp debuggables<CR>", { silent = true, desc = "Rust: Debuggables" })
-  -- else
-  --   lsp_map("<D-.>", require("actions-preview").code_actions, "[C]ode [A]ction")
-  -- end
   lsp_map("<A-S-.>", require("actions-preview").code_actions, "[C]ode [A]ction")
 
   lsp_map("<D-r>", require("renamer").rename, "[R]e[n]ame")
@@ -315,3 +309,67 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAt
 })
 -- trigger codelens refresh
 vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
+
+
+-- Define the function in the global scope
+_G.yank_and_paste = function()
+  vim.cmd("wincmd h")
+
+  -- Delete all lines in buffer A
+  vim.cmd("%d")
+
+  print("empty!")
+
+  -- Switch to the right buffer (B)
+  vim.cmd("wincmd l")
+
+  -- Search for the first ''' marker
+  local start_pos = vim.fn.search("'''", "n")
+  if start_pos == 0 then
+    print("No starting ''' found!")
+    return
+  end
+
+  -- Move to the line after the first ''' marker
+  local actual_start = start_pos + 1
+
+  -- Position cursor at the starting point
+  vim.cmd("normal! " .. actual_start .. "G0")
+
+  -- Search for the second ''' marker
+  local end_pos = vim.fn.search("'''", "n")
+  if end_pos == 0 then
+    print("No ending ''' found!")
+    return
+  end
+
+  -- Move to the line before the ending marker
+  local actual_end = end_pos - 1
+
+  -- Select and yank from after first marker to before second marker
+  if actual_start <= actual_end then
+    vim.cmd(actual_start .. "," .. actual_end .. "y")
+  else
+    print("Invalid selection range!")
+    return
+  end
+
+  -- After yanking and before pasting
+  local content = vim.fn.getreg('"')
+  content = content:gsub("^%s*(.-)%s*$", "%1") -- Trim leading/trailing whitespace and newlines
+  vim.fn.setreg('"', content)
+
+  -- Switch back to the left buffer (A)
+  vim.cmd("wincmd h")
+
+  -- Check if unnamed register is not empty before pasting
+  if vim.fn.getreg('"') ~= '' then
+    -- Paste at the beginning of the buffer
+    vim.cmd("normal! 1G0P")
+  else
+    print("No code to paste!")
+  end
+end
+
+-- Create a key mapping for <leader>rq
+vim.api.nvim_set_keymap('n', '<leader>rq', ':lua yank_and_paste()<CR>', { noremap = true, silent = true })
