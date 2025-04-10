@@ -69,3 +69,7 @@ fi
 
 source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
 exec fish
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
