@@ -9,8 +9,6 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.spell = true
 
-
-
 local IS_STREAMING = os.getenv("STREAM") ~= nil
 if IS_STREAMING then
   vim.print("Subscribe to my twitter @goose_plus_plus")
@@ -71,6 +69,17 @@ vim.opt.title = true
 vim.o.titlestring = '∀ %{fnamemodify(getcwd(), ":t")}->>%{expand("%:t")}'
 
 require("config.lazy")
+
+require("lspconfig").harper_ls.setup({
+  settings = {
+    ["harper-ls"] = {
+      linters = {
+        SentenceCapitalization = false,
+        SpellCheck = true,
+      },
+    },
+  },
+})
 
 local function format_and_save()
   vim.cmd("Format")
@@ -310,7 +319,6 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAt
 -- trigger codelens refresh
 vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
 
-
 -- Define the function in the global scope
 _G.yank_and_paste = function()
   vim.cmd("wincmd h")
@@ -363,7 +371,7 @@ _G.yank_and_paste = function()
   vim.cmd("wincmd h")
 
   -- Check if unnamed register is not empty before pasting
-  if vim.fn.getreg('"') ~= '' then
+  if vim.fn.getreg('"') ~= "" then
     -- Paste at the beginning of the buffer
     vim.cmd("normal! 1G0P")
   else
@@ -372,4 +380,4 @@ _G.yank_and_paste = function()
 end
 
 -- Create a key mapping for <leader>rq
-vim.api.nvim_set_keymap('n', '<leader>rq', ':lua yank_and_paste()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>rq", ":lua yank_and_paste()<CR>", { noremap = true, silent = true })
