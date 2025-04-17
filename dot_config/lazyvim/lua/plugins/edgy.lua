@@ -9,11 +9,11 @@ return {
         ft = "snacks_terminal",
         size = { height = 0.4 },
         title = "%{b:snacks_terminal.id}: %{b:term_title}",
-        filter = function(_buf, win)
+        filter = function(buf, win)
           return vim.w[win].snacks_win
-              and vim.w[win].snacks_win.position == pos
-              and vim.w[win].snacks_win.relative == "editor"
-              and not vim.w[win].trouble_preview
+            and vim.w[win].snacks_win.position == pos
+            and vim.w[win].snacks_win.relative == "editor"
+            and not vim.w[win].trouble_preview
         end,
       })
     end
