@@ -1,6 +1,7 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    terminal = {},
     dashboard = {
       sections = {
         { section = "header" },
@@ -12,6 +13,6 @@ return {
       -- your dashboard configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
-  }
+    },
+  },
 }
