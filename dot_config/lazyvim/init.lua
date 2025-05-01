@@ -75,7 +75,7 @@ require("lspconfig").harper_ls.setup({
     ["harper-ls"] = {
       linters = {
         SentenceCapitalization = false,
-        SpellCheck = true,
+        SpellCheck = false,
       },
     },
   },
