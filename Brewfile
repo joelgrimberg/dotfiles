@@ -257,6 +257,7 @@ cask "zoom"
 mas "iA Writer", id: 775737590
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
+mas "Klack", id: 6446206067
 mas "Microsoft Excel", id: 462058435
 mas "Microsoft Outlook", id: 985367838
 mas "Microsoft PowerPoint", id: 462062816
